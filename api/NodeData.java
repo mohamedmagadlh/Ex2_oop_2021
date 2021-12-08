@@ -1,4 +1,4 @@
-package api;
+package api.api;
 
 /**
  * This interface represents the set of operations applicable on a 
