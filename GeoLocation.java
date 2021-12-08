@@ -1,42 +1,11 @@
-public class GeoLocation implements api.GeoLocation {
-    private double x;
-    private double  y;
-    private  double z;
-    public GeoLocation(double x, double y, double z)
-    {
-     this.x=x;
-     this.y=y;
-     this.z=z;
-    }
-    @Override
-    public double x() {
-        return this.x;
-    }
-
-    @Override
-    public double y() {
-        return this.y;
-    }
-
-    @Override
-    public double z() {
-        return this.z;
-    }
-
-    @Override
-    public double distance(api.GeoLocation g) {
-        if(g instanceof GeoLocation) {
-            GeoLocation G = (GeoLocation) g;
-            return Math.sqrt(Math.pow(this.x - G.x, 2) + Math.pow(this.y - G.y, 2) + Math.pow(this.z - G.z, 2));
-        }
-        else  return -1;
-
-    }
-    public String toString() {
-        return "My_GoeLocation{" +
-                "x=" + x +
-                ", y=" + y +
-                ", z=" + z +
-                '}';
-    }
+package api;
+/**
+ * This interface represents a geo location <x,y,z>, (aka Point3D data).
+ *
+ */
+public interface GeoLocation {
+    public double x();
+    public double y();
+    public double z();
+    public double distance(GeoLocation g);
 }
