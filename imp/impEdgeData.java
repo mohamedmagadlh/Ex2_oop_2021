@@ -2,7 +2,7 @@ package api.imp;
 
 import api.api.EdgeData;
 
-public class EdgeDataClass implements EdgeData {
+public class impEdgeData implements EdgeData {
 
     private int src;
     private int dest;
@@ -10,7 +10,7 @@ public class EdgeDataClass implements EdgeData {
     private String info;
     private int tag;
 
-    EdgeDataClass(int src, int dest, double weight, String info, int tag) {
+    impEdgeData(int src, int dest, double weight, String info, int tag) {
         this.tag = tag;
         this.dest = dest;
         this.weight = weight;
@@ -18,7 +18,7 @@ public class EdgeDataClass implements EdgeData {
         this.src = src;
     }
 
-    public EdgeDataClass(int src, int dest, double w) {
+    public impEdgeData(int src, int dest, double w) {
         this.dest = dest;
         this.src = src;
         this.weight = w;
@@ -26,7 +26,7 @@ public class EdgeDataClass implements EdgeData {
         this.info="";
     }
 
-    public EdgeDataClass(int src, int dest) {
+    public impEdgeData(int src, int dest) {
         this.dest = dest;
         this.src = src;
         this.weight=0;

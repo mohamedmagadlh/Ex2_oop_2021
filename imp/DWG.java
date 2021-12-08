@@ -42,7 +42,7 @@ public class DWG implements DirectedWeightedGraph {
 
     @Override
     public void connect(int src, int dest, double w) {
-    EdgeDataClass e=new EdgeDataClass(src,dest,w);
+    impEdgeData e=new impEdgeData(src,dest,w);
     if(NodesHash.containsKey(src)&& NodesHash.containsKey(dest) && w>0)
         EdgesHash.get(src).put(dest,e);
     else {
@@ -88,7 +88,7 @@ public class DWG implements DirectedWeightedGraph {
     @Override
     public EdgeData removeEdge(int src, int dest) {
         if(getEdge(src,dest)==null)return null;
-        EdgeDataClass e=new EdgeDataClass(src,dest);
+        impEdgeData e=new impEdgeData(src,dest);
         EdgesHash.get(src).remove(dest);
         MC++;
         return e;

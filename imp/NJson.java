@@ -17,8 +17,8 @@ public class NJson implements JsonDeserializer<NodeData>, JsonSerializer<NodeDat
         double x = Double.parseDouble(posArr[0]);
         double y = Double.parseDouble(posArr[1]);
         double z = Double.parseDouble(posArr[2]);
-        GeoLocation g = new GeoLocationimp(x,y,z);
-        NodeData newNode = new nodeDataimp(id, g, 0.0, 0, "");
+        GeoLocation g = new impGeoLocation(x,y,z);
+        NodeData newNode = new impNodeData(id, g, 0.0, 0, "");
 
         return newNode;
     }

@@ -2,11 +2,11 @@ package api.imp;
 
 import api.api.GeoLocation;
 
-public class GeoLocationimp implements GeoLocation {
+public class impGeoLocation implements GeoLocation {
     private double x;
     private double  y;
     private  double z;
-    public GeoLocationimp(double x, double y, double z)
+    public impGeoLocation(double x, double y, double z)
     {
      this.x=x;
      this.y=y;
@@ -29,8 +29,8 @@ public class GeoLocationimp implements GeoLocation {
 
     @Override
     public double distance(GeoLocation g) {
-        if(g instanceof GeoLocationimp) {
-            GeoLocationimp G = (GeoLocationimp) g;
+        if(g instanceof impGeoLocation) {
+            impGeoLocation G = (impGeoLocation) g;
             return Math.sqrt(Math.pow(this.x - G.x, 2) + Math.pow(this.y - G.y, 2) + Math.pow(this.z - G.z, 2));
         }
         else  return -1;
