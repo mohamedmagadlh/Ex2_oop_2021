@@ -18,11 +18,13 @@ public class DWGAlgo implements DirectedWeightedGraphAlgorithms {
 
     @Override
     public void init(DirectedWeightedGraph g) {
+
         this.g = (DWG) g;
     }
 
     @Override
     public DirectedWeightedGraph getGraph() {
+
         return this.g;
     }
 
@@ -121,13 +123,15 @@ public class DWGAlgo implements DirectedWeightedGraphAlgorithms {
     public boolean load(String file) {
         try {
             GsonBuilder builder = new GsonBuilder();
-            builder.registerTypeAdapter(DWG.class, new toJson());
+            builder.registerTypeAdapter(DWG.class, new Json_Graph());
             Gson gson = builder.create();
 
             FileReader reader = new FileReader(file);
-            this.g = gson.fromJson(reader, DWG.class);
+            DWG nGraph = gson.fromJson(reader, DWG.class);
+            this.init(nGraph);
             return true;
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;
         }
