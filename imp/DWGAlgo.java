@@ -4,8 +4,10 @@ import api.api.DirectedWeightedGraph;
 import api.api.DirectedWeightedGraphAlgorithms;
 import api.api.NodeData;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,7 +118,20 @@ public class DWGAlgo implements DirectedWeightedGraphAlgorithms {
 
     @Override
     public boolean save(String file) {
-        return false;
+        GsonBuilder g = new GsonBuilder();
+        g.registerTypeAdapter(DWG.class, new Json_Graph());
+        Gson gson = g.create();
+        String json = gson.toJson(getGraph());
+        try {
+            PrintWriter p = new PrintWriter(new File(file));
+            p.write(json);
+            p.close();
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

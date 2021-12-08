@@ -1,7 +1,7 @@
 package api.imp;
 
 import api.api.DirectedWeightedGraph;
-import api.imp.GeoLocationimp;
+import api.api.EdgeData;
 import api.api.NodeData;
 import com.google.gson.*;
 
