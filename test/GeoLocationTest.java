@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GeoLocationTTest {
+class GeoLocationTest {
     GeoLocation Gsrc=new impGeoLocation(15,17,22.3);
     GeoLocation Gdest=new impGeoLocation(1,4,2.5);
     @Test

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class NodeDataTTest {
+class NodeDataTest {
     impGeoLocation G1 = new impGeoLocation(25,2,0);
     impNodeData N1 = new impNodeData(1,G1,0.0);
     impGeoLocation G2 = new impGeoLocation(16.2,3,0);
