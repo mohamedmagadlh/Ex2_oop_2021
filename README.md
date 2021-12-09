@@ -6,5 +6,7 @@ This project represents the structure of a directed weighted graph.
 -  Each node has a one key no more.
 -  Each edge has value presents weight, connect between src node and dest.
 -  User can edit the graph by adding and removing nodes and edges.
-      
+---
+### Algorithms
+- Those algorithms was used to help to implement our methods.
 
