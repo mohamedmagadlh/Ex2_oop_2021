@@ -4,26 +4,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class nodeDataimpTest {
+class impEdgeDataTest {
 
     @Test
-    void getKey() {
+    void getSrc() {
     }
 
     @Test
-    void getLocation() {
-    }
-
-    @Test
-    void setLocation() {
+    void getDest() {
     }
 
     @Test
     void getWeight() {
-    }
-
-    @Test
-    void setWeight() {
     }
 
     @Test

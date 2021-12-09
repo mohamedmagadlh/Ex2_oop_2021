@@ -5,7 +5,7 @@ import api.api.NodeData;
 
 import java.util.ArrayList;
 import java.util.Collection;
-class impNodeData implements NodeData {
+public class impNodeData implements NodeData {
     private int key;
     private GeoLocation geoLocation;
     private double weight;
@@ -14,7 +14,7 @@ class impNodeData implements NodeData {
     private static int white = 0;
     private static int black = 1;
     private static int gray = 2;
-    public impNodeData(int key, GeoLocation geoLocation, double weight, int tag, String info)
+    public impNodeData(int key, GeoLocation geoLocation, double weight)
     {
         this.key=key;
         this.geoLocation=geoLocation;

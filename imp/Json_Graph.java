@@ -21,7 +21,7 @@ public class Json_Graph implements JsonDeserializer<DirectedWeightedGraph>, Json
             double x = Double.parseDouble(posArr[0]);
             double y = Double.parseDouble(posArr[1]);
             double z = Double.parseDouble(posArr[2]);
-            impNodeData temp = new impNodeData(key, new impGeoLocation(x,y,z), 0, 0,"");
+            impNodeData temp = new impNodeData(key, new impGeoLocation(x,y,z), 0);
             nGraph.addNode(temp);
         }
         for (JsonElement E : eArr ) {
