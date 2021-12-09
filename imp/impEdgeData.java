@@ -10,7 +10,7 @@ public class impEdgeData implements EdgeData {
     private String info;
     private int tag;
 
-    impEdgeData(int src, int dest, double weight, String info, int tag) {
+    public impEdgeData(int src, int dest, double weight, String info, int tag) {
         this.tag = tag;
         this.dest = dest;
         this.weight = weight;

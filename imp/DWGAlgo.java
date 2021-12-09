@@ -34,13 +34,13 @@ public class DWGAlgo implements DirectedWeightedGraphAlgorithms {
     public DirectedWeightedGraph copy() {
         DWG newG = new DWG();
         for (NodeData i : this.g.NodesHash.values()) {
-            NodeData v = new impNodeData(i.getKey(), i.getLocation(), i.getWeight());
+            NodeData v = new impNodeData(i.getKey(), i.getLocation(), i.getWeight(),i.getInfo(),i.getTag());
             newG.NodesHash.put(v.getKey(), v);
             newG.addNode(v);
         }
         newG.setMC(g.getMC());
 
-        NodeData vert = new impNodeData(this.g.nodeData.getKey(), this.g.nodeData.getLocation(), this.g.nodeData.getWeight());
+        NodeData vert = new impNodeData(this.g.nodeData.getKey(), this.g.nodeData.getLocation(), this.g.nodeData.getWeight(),this.g.nodeData.getInfo(),this.g.nodeData.getTag());
 
         return newG;
     }

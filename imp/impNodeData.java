@@ -14,7 +14,7 @@ public class impNodeData implements NodeData {
     private static int white = 0;
     private static int black = 1;
     private static int gray = 2;
-    public impNodeData(int key, GeoLocation geoLocation, double weight)
+    public impNodeData(int key, GeoLocation geoLocation, double weight,String info, int tag)
     {
         this.key=key;
         this.geoLocation=geoLocation;

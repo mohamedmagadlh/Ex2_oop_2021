@@ -6,17 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DWGAlgoTest {
 
-    @Test
-    void init() {
-    }
-
-    @Test
-    void getGraph() {
-    }
-
-    @Test
-    void copy() {
-    }
 
     @Test
     void isConnected() {
@@ -32,6 +21,7 @@ class DWGAlgoTest {
 
     @Test
     void center() {
+
     }
 
     @Test
@@ -46,7 +36,4 @@ class DWGAlgoTest {
     void load() {
     }
 
-    @Test
-    void DFS() {
-    }
 }

@@ -1,10 +1,15 @@
 package api.test;
 
+import api.api.EdgeData;
+import api.api.NodeData;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DWGTest {
+
 
     @Test
     void getNode() {
