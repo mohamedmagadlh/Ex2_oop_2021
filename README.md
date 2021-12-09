@@ -9,4 +9,5 @@ This project represents the structure of a directed weighted graph.
 ---
 ### Algorithms
 - Those algorithms was used to help to implement our methods.
+- [Dijkstra's](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
 
