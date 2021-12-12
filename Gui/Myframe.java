@@ -1,107 +1,267 @@
 package api.Gui;
 
+import api.imp.DWG;
+import api.imp.DWGAlgo;
+import api.imp.impGeoLocation;
+import api.imp.impNodeData;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import api.Gui.CirclePanel;
 public class Myframe extends JFrame implements ActionListener, MouseListener {
-    JButton addnodeButt, removenodeButt, addedgeButt, removedgeButt;
-    JPanel jPanel;
-    Myframe() {
-        addnodeButt = new JButton();
-        removenodeButt = new JButton();
-        addedgeButt = new JButton();
-        removedgeButt = new JButton();
-        /////////////////////////////
-        addnodeButt.setBounds(620, 622, 0, 0);
-        addnodeButt.setSize(120, 40);
-        addnodeButt.setVisible(true);
-        /////////////////////////////
-        removenodeButt.setBounds(500, 622, 0, 0);
-        removenodeButt.setSize(120, 40);
-        removenodeButt.setVisible(true);
-        /////////////////////////////
-        addedgeButt.setBounds(400, 622, 0, 0);
-        addedgeButt.setSize(100, 40);
-        addedgeButt.setVisible(true);
-        /////////////////////////////
-        removedgeButt.setBounds(300, 622, 0, 0);
-        removedgeButt.setSize(100, 40);
-        removedgeButt.setVisible(true);
-        /////////////////////////////
-        addnodeButt.setText("addnode");
-        addnodeButt.setFocusable(false);
-        addnodeButt.setBackground(Color.lightGray);
-        /////////////////////////////
-        removenodeButt.setText("removenode");
-        removenodeButt.setFocusable(false);
-        removenodeButt.setBackground(Color.lightGray);
-        /////////////////////////////
-        addedgeButt.setText("addedge");
-        addedgeButt.setFocusable(false);
-        addedgeButt.setBackground(Color.lightGray);
-        /////////////////////////////
-        removedgeButt.setText("removedge");
-        removedgeButt.setFocusable(false);
-        removedgeButt.setBackground(Color.lightGray);
-        ////////////////////////////
-        addnodeButt.addActionListener(this);
-        removenodeButt.addActionListener(this);
-        addedgeButt.addActionListener(this);
-        removedgeButt.addActionListener(this);
-        this.addMouseListener(this);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
-        this.pack();
-        setSize(750, 700);
-        setVisible(true);
-        ///////////////////////
-        this.add(addnodeButt);
-        this.add(removenodeButt);
-        this.add(addedgeButt);
-        this.add(removedgeButt);
-
-
-    }
-
     public static void main(String[] args) {
         new Myframe();
     }
 
+    Window window;
+    MenuItem load = new MenuItem("Load");
+    MenuItem save = new MenuItem("Save");
+    MenuItem addNode = new MenuItem("AddNode");
+    MenuItem removeNode = new MenuItem("RemoveNodes");
+    MenuItem connect = new MenuItem("ConnectNodes");
+    MenuItem removeEdge = new MenuItem("RemoveEdge");
+    MenuItem shortestPath = new MenuItem("ShortestPath");
+    MenuItem shortestPathDist = new MenuItem("shortestPathDist");
+    MenuItem isConnected = new MenuItem("isConnected");
+    MenuItem center = new MenuItem("Center");
+    MenuItem tsp = new MenuItem("TSP");
+
+    ////////////////////////////
+    public void init() {
+        this.setLayout(new FlowLayout());
+        this.setTitle("Directed Weighted Graph ");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setBounds(260, 120, 1000, 500);
+        this.setVisible(true);
+    }
+
+    DWGAlgo graphalgo = new DWGAlgo();
+
+    public Myframe() {
+        init();
+         //graphalgo.load("C:\\Users\\moham\\OneDrive\\Desktop\\Ex2_oop_2021\\json\\G1.json");
+        addMenu();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == addnodeButt) {
-            System.out.println("addnode");
-        }
-        if (e.getSource() == removenodeButt) {
-            System.out.println("removenode");
-        }
-        if (e.getSource() == addedgeButt) {
-            System.out.println("addedge");
-        }
-        if (e.getSource() == removedgeButt) {
-            System.out.println("removedge");
+
+        if (e.getSource() == addNode) {
+            JPanel addnode = new JPanel();
+            JTextField key = new JTextField(8);
+            JTextField x = new JTextField(8);
+            JTextField y = new JTextField(8);
+            JTextField z = new JTextField(8);
+            ////////////////////////////
+            addnode.add(Box.createVerticalStrut(10));
+            addnode.add(new JLabel("id"));
+            addnode.add(key);
+            addnode.add(Box.createVerticalStrut(10));
+            addnode.add(new JLabel("x"));
+            addnode.add(x);
+            addnode.add(Box.createVerticalStrut(10));
+            addnode.add(new JLabel("y"));
+            addnode.add(y);
+            addnode.add(Box.createVerticalStrut(10));
+            addnode.add(new JLabel("z"));
+            addnode.add(z);
+            ////////////////////////////
+            int addeN = JOptionPane.showConfirmDialog(null, addnode, "",
+                    JOptionPane.CANCEL_OPTION);
+
+            System.out.println(JOptionPane.OK_OPTION);
+            if (addeN == JOptionPane.OK_OPTION) {
+                try {
+                    int id = Integer.parseInt(key.getText());
+                    Double x1 = Double.parseDouble(x.getText());
+                    Double y1 = Double.parseDouble(y.getText());
+                    Double z1 = Double.parseDouble(z.getText());
+                    //////////////////////////
+                    if (graphalgo.getGraph() != null) {
+                        graphalgo.getGraph().addNode(new impNodeData(id, new impGeoLocation(x1, y1, z1), 0, "", 0));
+                    } else {
+                        DWG graph = new DWG();
+                        impNodeData node = new impNodeData(id, new impGeoLocation(x1, y1, z1), 0, "", 0);
+                        graph.addNode(node);
+                        graphalgo.init(graph);
+                    }
+                    drawN(id, x1, y1, z1);
+                } catch (NumberFormatException ex) {
+                    return;
+                }
+                if (e.getSource() == removeNode) {
+                    JPanel removenode = new JPanel();
+                    JTextField removeid = new JTextField(8);
+                    removenode.add(new JLabel(""));
+                    removenode.add(removeid);
+
+                    int removenodes = JOptionPane.showConfirmDialog(null, removenode, "", JOptionPane.CANCEL_OPTION);
+                    if (removenodes == JOptionPane.OK_OPTION) {
+                        try {
+                            int id = Integer.parseInt(removeid.getText());
+                            graphalgo.getGraph().removeNode(id);
+                        } catch (IllegalArgumentException ex) {
+                            return;
+                        }
+                    }
+                }
+                if (e.getSource() == removeEdge) {
+                    JPanel removedge = new JPanel();
+                    JTextField removesrc = new JTextField(8);
+                    JTextField removedest = new JTextField(8);
+                    removedge.add(removesrc);
+                    removedge.add(removedest);
+                    removedge.add(Box.createVerticalStrut(10));
+
+                    int removedges = JOptionPane.showConfirmDialog(null, removedge, "", JOptionPane.CANCEL_OPTION);
+
+                    if (removedges == JOptionPane.OK_OPTION) {
+                        try {
+                            int src = Integer.parseInt(removesrc.getText());
+                            int dest = Integer.parseInt(removedest.getText());
+                            graphalgo.getGraph().removeEdge(src, dest);
+                        } catch (NumberFormatException ex) {
+                            return;
+                        }
+                    }
+                }
+                if (e.getSource() == connect) {
+                    JPanel addedge = new JPanel();
+                    JTextField src = new JTextField(8);
+                    JTextField dest = new JTextField(8);
+                    JTextField w = new JTextField(8);
+                    addedge.add(src);
+                    addedge.add(Box.createVerticalStrut(10));
+                    addedge.add(dest);
+                    addedge.add(w);
+
+                    int addedges = JOptionPane.showConfirmDialog(null, addedge, "", JOptionPane.CANCEL_OPTION);
+
+                    if (addedges == JOptionPane.OK_OPTION) {
+                        try {
+                            int src1 = Integer.parseInt(src.getText());
+                            int dest1 = Integer.parseInt(dest.getText());
+                            double w1 = Double.parseDouble(w.getText());
+                            if (graphalgo.getGraph().nodeSize() > 1) {
+                                graphalgo.getGraph().connect(src1, dest1, w1);
+                            }
+                        } catch (NumberFormatException ex) {
+                            return;
+                        }
+                    }
+                }
+                if (e.getSource() == shortestPath) {
+                    JPanel shortestPath = new JPanel();
+                    JTextField src = new JTextField(8);
+                    JTextField dest = new JTextField(8);
+                    shortestPath.add(new JLabel(""));
+                    shortestPath.add(src);
+                    shortestPath.add(Box.createVerticalStrut(10));
+                    shortestPath.add(new JLabel(""));
+                    shortestPath.add(dest);
+
+                    int shortestPaths = JOptionPane.showConfirmDialog(null, shortestPath, "", JOptionPane.CANCEL_OPTION);
+                    if (shortestPaths == JOptionPane.OK_OPTION) {
+                        try {
+                            int src1 = Integer.parseInt(src.getText());
+                            int dest1= Integer.parseInt(dest.getText());
+
+                            String shortestPathl = graphalgo.shortestPath(src1, dest1).toString();
+                            shortestPathl = shortestPathl.substring(1, shortestPathl.length() - 1);
+
+                        } catch (NumberFormatException ex) {
+                            return;
+                        }
+                    }
+
+                }
+            }
+
         }
     }
 
+    public void drawN(int key, Double x, Double y, Double z) {
+        return;
+    }
 
+    public void save(String src) {
+        graphalgo.save(src);
+    }
+
+    protected void load(String src) {
+        graphalgo = new DWGAlgo();
+        graphalgo.load(src);
+
+    }
+
+    public void addMenu() {
+        MenuBar bar = new MenuBar();
+        Menu actionsMenu = new Menu("Actions");
+        Menu algorithmsMenu = new Menu("Algorithms");
+        bar.add(actionsMenu);
+        bar.add(algorithmsMenu);
+        this.setMenuBar(bar);
+        ////////////////////////////
+        load.addActionListener(this);
+        save.addActionListener(this);
+        addNode.addActionListener(this);
+        connect.addActionListener(this);
+        removeNode.addActionListener(this);
+        removeEdge.addActionListener(this);
+        actionsMenu.add(load);
+        actionsMenu.add(save);
+        actionsMenu.add(addNode);
+        actionsMenu.add(connect);
+        actionsMenu.add(removeNode);
+        actionsMenu.add(removeEdge);
+        ////////////////////////////
+        shortestPath.addActionListener(this);
+        shortestPathDist.addActionListener(this);
+        tsp.addActionListener(this);
+        isConnected.addActionListener(this);
+        center.addActionListener(this);
+        algorithmsMenu.add(shortestPath);
+        algorithmsMenu.add(shortestPathDist);
+        algorithmsMenu.add(tsp);
+        algorithmsMenu.add(isConnected);
+        algorithmsMenu.add(center);
+    }
+
+    ////////////////////////////
     @Override
     public void mouseClicked(MouseEvent e) {
-        Graphics g = getGraphics() ;
-        g.setColor(Color.pink);
-        g.fillOval(e.getX(),e.getY(),40,40);
+        return;
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+        return;
+    }
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+        return;
+    }
 
     @Override
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+        return;
+    }
 
     @Override
-    public void mouseExited(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {
+        return;
+    }
+
+    public class Window {
+    }
 }
+
+
+
+
+

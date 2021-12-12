@@ -22,11 +22,20 @@ public class impNodeData implements NodeData {
         this.tag=tag;
         this.info=info;
     }
+    public impNodeData() {
+        this.key=0;
+        this.geoLocation=null;
+        this.weight=0;
+        this.tag=0;
+        this.info="";
 
-
+    }
     @Override
     public int getKey() {
         return this.key;
+    }
+    public void setKey(int key) {
+         this.key=key;
     }
 
     @Override
