@@ -1,6 +1,8 @@
-package api.imp;
+package api.test;
 
 import api.api.NodeData;
+import api.imp.DWG;
+import api.imp.impNodeData;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

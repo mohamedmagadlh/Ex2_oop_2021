@@ -8,8 +8,8 @@ import java.util.*;
 
 public class DWG implements DirectedWeightedGraph {
       NodeData nodeData;
-     HashMap<Integer, NodeData> NodesHash;
-     HashMap<Integer,HashMap<Integer,EdgeData>>EdgesHash;
+     public HashMap<Integer, NodeData> NodesHash;
+    public HashMap<Integer,HashMap<Integer,EdgeData>>EdgesHash;
      int MC;
     public DWG()
     {
