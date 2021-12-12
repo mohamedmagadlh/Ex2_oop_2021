@@ -30,10 +30,9 @@ public class DWG implements DirectedWeightedGraph {
     }
     @Override
     public void addNode(NodeData n) {
-        if(NodesHash.containsKey(n.getKey()) || n.getWeight()<=0)
+        if(NodesHash.containsKey(n.getKey()))
         {
             System.err.println("ADD IS FAIL");
-            return;
         }
         NodesHash.put(n.getKey(),n);
         EdgesHash.put(n.getKey(),new HashMap<Integer,EdgeData>());
@@ -46,7 +45,7 @@ public class DWG implements DirectedWeightedGraph {
     if(NodesHash.containsKey(src)&& NodesHash.containsKey(dest) && w>0)
         EdgesHash.get(src).put(dest,e);
     else {
-        System.err.println("CONNECT FAIL\nn");
+        System.err.println("CONNECT FAIL\n");
         return;
     }
     MC++;

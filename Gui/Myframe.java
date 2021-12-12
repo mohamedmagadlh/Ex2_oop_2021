@@ -1,5 +1,6 @@
 package api.Gui;
 
+import api.api.NodeData;
 import api.imp.DWG;
 import api.imp.DWGAlgo;
 import api.imp.impGeoLocation;
@@ -11,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Myframe extends JFrame implements ActionListener, MouseListener {
     public static void main(String[] args) {
@@ -43,7 +46,7 @@ public class Myframe extends JFrame implements ActionListener, MouseListener {
 
     public Myframe() {
         init();
-         //graphalgo.load("C:\\Users\\moham\\OneDrive\\Desktop\\Ex2_oop_2021\\json\\G1.json");
+        graphalgo.load("C:\\Users\\moham\\OneDrive\\Desktop\\Ex2_oop_2021\\json\\G1.json");
         addMenu();
     }
 
@@ -140,7 +143,6 @@ public class Myframe extends JFrame implements ActionListener, MouseListener {
                     addedge.add(w);
 
                     int addedges = JOptionPane.showConfirmDialog(null, addedge, "", JOptionPane.CANCEL_OPTION);
-
                     if (addedges == JOptionPane.OK_OPTION) {
                         try {
                             int src1 = Integer.parseInt(src.getText());
@@ -168,7 +170,7 @@ public class Myframe extends JFrame implements ActionListener, MouseListener {
                     if (shortestPaths == JOptionPane.OK_OPTION) {
                         try {
                             int src1 = Integer.parseInt(src.getText());
-                            int dest1= Integer.parseInt(dest.getText());
+                            int dest1 = Integer.parseInt(dest.getText());
 
                             String shortestPathl = graphalgo.shortestPath(src1, dest1).toString();
                             shortestPathl = shortestPathl.substring(1, shortestPathl.length() - 1);
@@ -178,6 +180,56 @@ public class Myframe extends JFrame implements ActionListener, MouseListener {
                         }
                     }
 
+                }
+                if (e.getSource() == shortestPathDist) {
+                    JPanel shortestPathDist = new JPanel();
+                    JTextField src = new JTextField(8);
+                    JTextField dest = new JTextField(8);
+                    shortestPathDist.add(new JLabel(""));
+                    shortestPathDist.add(src);
+                    shortestPathDist.add(Box.createVerticalStrut(10));
+                    shortestPathDist.add(new JLabel(""));
+                    shortestPathDist.add(dest);
+                    int shortestPathDists = JOptionPane.showConfirmDialog(null, shortestPathDist, "", JOptionPane.CANCEL_OPTION);
+                    if (shortestPathDists == JOptionPane.OK_OPTION) {
+                        try {
+
+                            int src1 = Integer.parseInt(src.getText());
+                            int dest1 = Integer.parseInt(dest.getText());
+                            double short1 = graphalgo.shortestPathDist(src1, dest1);
+                        } catch (NumberFormatException ex) {
+                            return;
+                        }
+                    }
+
+                }
+                if (e.getSource() == tsp) {
+
+                    JTextField tsplist = new JTextField(8);
+                    JPanel tsp = new JPanel();
+                    tsp.add(new JLabel(""));
+                    tsp.add(tsplist);
+
+                    int tsps = JOptionPane.showConfirmDialog(null, tsp, "", JOptionPane.CANCEL_OPTION);
+                    if (tsps == JOptionPane.OK_OPTION) {
+                        try {
+                            String[] tspstring = tsplist.getText().split("");
+                            List<NodeData> arrayList = new ArrayList<>();
+                            for (int i = 0; i < tspstring.length; i++) {
+                                NodeData crr = graphalgo.getGraph().getNode(Integer.parseInt(tspstring[i]));
+                                arrayList.add(crr);
+                            }
+                            String tspl = graphalgo.tsp(arrayList).toString();
+                            tspl = tspl.substring(1, tspl.length() - 1);
+                        } catch (NumberFormatException ex) {
+                            return;
+                        }
+                    }
+
+                }if (e.getSource() == isConnected) {
+                    System.out.println("yes isConnected ");
+                }else{
+                    System.out.println("no is not Connected ");
                 }
             }
 
@@ -255,9 +307,6 @@ public class Myframe extends JFrame implements ActionListener, MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
         return;
-    }
-
-    public class Window {
     }
 }
 
