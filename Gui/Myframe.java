@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Myframe extends JFrame implements ActionListener, MouseListener {
     public static void main(String[] args) {
-        new Myframe();
+        new Myframe(graphalgo);
     }
 
     Window window;
@@ -42,9 +42,10 @@ public class Myframe extends JFrame implements ActionListener, MouseListener {
         this.setVisible(true);
     }
 
-    DWGAlgo graphalgo = new DWGAlgo();
+    static DWGAlgo graphalgo = new DWGAlgo();
 
-    public Myframe() {
+    public Myframe( DWGAlgo graphalgo )
+ {
         init();
         graphalgo.load("C:\\Users\\moham\\OneDrive\\Desktop\\Ex2_oop_2021\\json\\G1.json");
         addMenu();
